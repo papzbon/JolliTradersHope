@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="JolliTradersHope.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:JolliTradersHope"
+    Shell.FlyoutBehavior="Disabled"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:pages="clr-namespace:JolliTradersHope.Pages"
+    Shell.TabBarTitleColor="{StaticResource Mid}"
+    Shell.TabBarUnselectedColor="{StaticResource Primary}"
+    Shell.TabBarForegroundColor="{StaticResource Mid}">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}"/>
+    </Shell.Behaviors>
+    
+    <!--<ShellContent
+        Title="Jolli Traders App"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />-->
+    <TabBar>
+        <ShellContent Title="Home"
+                      Icon="{StaticResource Home}"
+                      ContentTemplate="{DataTemplate pages:HomePage}"
+                      Route="HomePage"/>
+        <ShellContent Title="Products"
+                      Icon="{StaticResource Products}"
+                      ContentTemplate="{DataTemplate pages:ProductsPage}"
+                      Route="ProductsPage"/>
+        <ShellContent Title="Orders"
+                      Icon="{StaticResource Orders}"
+                      ContentTemplate="{DataTemplate pages:OrdersPage}"
+                      Route="OrdersPage"/>
+        <ShellContent Title="Profile"
+                      Icon="{StaticResource Profile}"
+                      ContentTemplate="{DataTemplate pages:ProfilePage}"
+                      Route="ProfilePage"/>
+        <ShellContent Title="Help"
+                      Icon="{StaticResource Help}"
+                      ContentTemplate="{DataTemplate pages:HelpPage}"
+                      Route="HelpPage"/>
+    </TabBar>
+
+</Shell>
