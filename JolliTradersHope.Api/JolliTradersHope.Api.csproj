@@ -20,8 +20,4 @@
     <ProjectReference Include="..\JolliTradersHope.Shared\JolliTradersHope.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\categories\" />
-  </ItemGroup>
-
 </Project>
