@@ -26,8 +26,8 @@
                       Route="HomePage"/>
         <ShellContent Title="Products"
                       Icon="{StaticResource Products}"
-                      ContentTemplate="{DataTemplate pages:ProductsPage}"
-                      Route="ProductsPage"/>
+                      ContentTemplate="{DataTemplate pages:CategoryPage}"
+                      Route="CategoryPage"/>
         <ShellContent Title="Orders"
                       Icon="{StaticResource Orders}"
                       ContentTemplate="{DataTemplate pages:OrdersPage}"

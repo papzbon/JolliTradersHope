@@ -15,6 +15,11 @@
                Size="22"
                Glyph="{x:Static icons:IconFont.List}"/>
 
+    <FontImage x:Key="Cart"
+               FontFamily="FontAwesome"
+               Size="22"
+               Glyph="{x:Static icons:IconFont.ShoppingCart}"/>
+
     <FontImage x:Key="Home"
                FontFamily="FontAwesome"
                Size="30"

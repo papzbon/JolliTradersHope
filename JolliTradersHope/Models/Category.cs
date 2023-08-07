@@ -19,7 +19,7 @@
             get => _image;
             set
             {
-                _image = $"https://raw.githubusercontent.com/Abhayprince/FruitVegBasketMAUI/part-7/FruitVegBasket.Api/wwwroot/images/categories/{value}";
+                _image = $"https://raw.githubusercontent.com/Papiebon/JolliTradersHope/master/JolliTradersHope.Api/wwwroot/images/categories/{value}";
             }
         }
 

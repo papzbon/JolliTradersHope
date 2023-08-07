@@ -7,7 +7,6 @@
              xmlns:models="clr-namespace:JolliTradersHope.Models"
              xmlns:controls="clr-namespace:JolliTradersHope.Controls"
              xmlns:converter="clr-namespace:JolliTradersHope.Converter"
-             xmlns:dto="clr-namespace:JolliTradersHope.Shared.Dtos;assembly=JolliTradersHope.Shared"
              x:DataType="vm:HomePageViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -47,28 +46,11 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="Margin" Value="0, 1"/>
             </Style>
-
-            <Style TargetType="Button" x:Key="CartBtn">
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="HeightRequest" Value="30"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="WidthRequest" Value="35"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-            </Style>
             
-            <Style TargetType="Button" x:Key="AddToCartBtn">
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="HeightRequest" Value="30"/>
-                <Setter Property="WidthRequest" Value="60"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <Grid>
+        
     <ScrollView>
         <Grid>
             <VerticalStackLayout Padding="10, 15">
@@ -187,107 +169,9 @@
 
                 <Label Text="Popular"
                Style="{StaticResource H2}"/>
-                <FlexLayout BindableLayout.ItemsSource="{Binding PopularProducts}"
-                        Wrap="Wrap"
-                            JustifyContent="SpaceEvenly">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate x:DataType="dto:ProductDto">
-                            <Border Padding="10"
-                                    Margin="2"
-                                    FlexLayout.Basis="50%"
-                                    BackgroundColor="{StaticResource Primary}">
-                                <Grid RowDefinitions="175, Auto, Auto, Auto, Auto">
-                                    <Image Grid.Row="0"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center"
-                                           HeightRequest="175"/>
-                                    <Label Grid.Row="1" 
-                                           Text="{Binding Name}"
-                                           TextColor="White"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start"
-                                           FontSize="16"/>
-                                    <Label Grid.Row="2"
-                                           Text="{Binding Unit}"
-                                           TextColor="Wheat"
-                                           FontSize="12"/>
-                                    
-                                    <Grid Grid.Row="3"
-                                          ColumnDefinitions="*, 2*">
-                                        <Label Grid.Column="0"
-                                               FontSize="12"
-                                               VerticalOptions="Center"
-                                               FontAttributes="Bold"
-                                               Text="{Binding Price, StringFormat='P{0}'}"/>
 
-                                        <Button Grid.Column="1"
-                                            Text="Add"
-                                                IsVisible="False"
-                                                FontSize="14"
-                                                TextColor="{StaticResource White}"
-                                                CornerRadius="25"
-                                                BackgroundColor="{StaticResource Tertiary}"
-                                                    Style="{StaticResource AddToCartBtn}">
-
-                                            <Button.Triggers>
-                                                <DataTrigger TargetType="Button"
-                                                             Binding="{Binding CartQuantity}"
-                                                             Value="0">
-                                                    <Setter Property="IsVisible" Value="True"/>
-                                                </DataTrigger>
-                                            </Button.Triggers>
-                                        </Button>
-                                        
-                                        <Border Grid.Column="1"
-                                                IsVisible="True"
-                                                StrokeShape="RoundRectangle 6"
-                                                StrokeThickness="1"
-                                                Stroke="{StaticResource Tertiary}">
-
-                                            <Border.Triggers>
-                                                <DataTrigger TargetType="Border"
-                                                             Binding="{Binding CartQuantity}"
-                                                             Value="0">
-                                                    <Setter Property="IsVisible" Value="False"/>
-                                                </DataTrigger>
-                                            </Border.Triggers>
-
-                                            <Grid ColumnDefinitions="Auto, *, Auto">
-                                            <Button Grid.Column="0"
-                                            Text="-"
-                                                FontAttributes="Bold"
-                                                FontSize="16"
-                                                TextColor="{StaticResource White}"
-                                                BackgroundColor="{StaticResource Tertiary}"
-                                                    Style="{StaticResource CartBtn}"/>
-                                            <Label Grid.Column="1" 
-                                                   Text="{Binding CartQuantity}"
-                                                   FontSize="16"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                            <Button Grid.Column="2"
-                                            Text="+"
-                                                FontAttributes="Bold"
-                                                FontSize="16"
-                                                TextColor="{StaticResource White}"
-                                                BackgroundColor="{StaticResource Tertiary}"
-                                                    Style="{StaticResource CartBtn}"/>
-                                        </Grid>
-                                        </Border>
-                                    </Grid>
-
-                                    <Label Grid.Row="4" 
-                                           Text="{Binding CartQuantity, StringFormat='Qty: {0}'}"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start"
-                                           FontSize="16"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
+                <controls:ProductListControl Products="{Binding PopularProducts}"
+                                             AddRemoveCartClicked="ProductListControl_AddRemoveCartClicked"/>
 
             </VerticalStackLayout>
             <Grid IsVisible="{Binding IsBusy}">
@@ -304,5 +188,7 @@
                 </VerticalStackLayout>
             </Grid>
         </Grid>
-    </ScrollView>
+        </ScrollView>
+        <controls:CartControl Count="{Binding CartCount}"/>
+    </Grid>
 </ContentPage>

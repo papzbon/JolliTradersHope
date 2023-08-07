@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using JolliTradersHope.Interfaces;
 using JolliTradersHope.Pages;
+using JolliTradersHope.Repositories;
 using JolliTradersHope.Services;
 using JolliTradersHope.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -48,10 +49,15 @@ public static class MauiProgram
 
         
         builder.Services.AddSingleton<CategoryService>();
+        builder.Services.AddSingleton<IUserRepository, UserRepository>();
+        builder.Services.AddSingleton<UserService>();
         builder.Services.AddSingleton<ProductsService>();
         builder.Services.AddTransient<OffersService>();
         builder.Services.AddSingleton<HomePageViewModel>();
         builder.Services.AddSingleton<HomePage>();
+
+        builder.Services.AddSingleton<CartViewModel>();
+        
 
 #if DEBUG
         builder.Logging.AddDebug();
