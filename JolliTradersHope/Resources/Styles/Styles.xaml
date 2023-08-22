@@ -34,6 +34,11 @@
                Size="22"
                Glyph="{x:Static icons:IconFont.QuestionCircle}"/>
 
+    <FontImage x:Key="Plus"
+               FontFamily="FontAwesome"
+               Size="14"
+               Glyph="{x:Static icons:IconFont.Plus}"/>
+
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>

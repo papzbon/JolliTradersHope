@@ -4,13 +4,13 @@
              x:Class="JolliTradersHope.Controls.CartControl"
              x:Name="this">
     <Border BindingContext="{x:Reference this}"
-            BackgroundColor="{StaticResource Tertiary}"
+            BackgroundColor="{StaticResource Green}"
             HorizontalOptions="End"
-            VerticalOptions="End"
-            Padding="30, 10"
+            VerticalOptions="Start"
+            Padding="15, 5"
             StrokeShape="RoundRectangle 40"
             StrokeThickness="0"
-            Margin="5"
+            Margin="0, 10, 15, 0"
             x:Name="container">
         <!--<Border.Triggers>
             <DataTrigger TargetType="Border"
@@ -19,6 +19,11 @@
                 <Setter Property="IsVisible" Value="False"/>
             </DataTrigger>
         </Border.Triggers>-->
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+        </Border.GestureRecognizers>
+        
         <Border.Shadow>
             <Shadow Offset="1, 1"
                     Brush="{StaticResource Primary}"
@@ -30,12 +35,12 @@
                                VerticalOptions="Center"
                                Spacing="10">
             <Image Source="{StaticResource Cart}"
-                   HeightRequest="25"
-                   WidthRequest="25"
+                   HeightRequest="16"
+                   WidthRequest="16"
                    Aspect="AspectFit"/>
             <Label Text="{Binding Count}"
                    TextColor="White"
-                   FontSize="25"
+                   FontSize="18"
                    FontAttributes="Bold"/>
         </HorizontalStackLayout>
     </Border>

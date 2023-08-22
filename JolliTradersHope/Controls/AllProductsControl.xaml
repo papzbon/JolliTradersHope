@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JolliTradersHope.Controls.ProductListControl"
+             x:Class="JolliTradersHope.Controls.AllProductsControl"
              xmlns:dto="clr-namespace:JolliTradersHope.Shared.Dtos;assembly=JolliTradersHope.Shared"
              xmlns:controls="clr-namespace:JolliTradersHope.Controls"
-             x:DataType="controls:ProductListControl"
+             x:DataType="controls:AllProductsControl"
              x:Name="this">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -29,9 +29,9 @@
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    
+
     <FlexLayout BindingContext="{x:Reference this}"
-                BindableLayout.ItemsSource="{Binding Products}"
+                BindableLayout.ItemsSource="{Binding AllProducts}"
                 Wrap="Wrap"
                 JustifyContent="SpaceEvenly">
         <BindableLayout.ItemTemplate>
@@ -43,48 +43,29 @@
                         BackgroundColor="{StaticResource Primary}">
                     <Grid RowDefinitions="175, Auto, Auto, Auto, Auto">
                         <Image Grid.Row="0"
-                                           Source="{Binding Image}"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center"
-                                           HeightRequest="175"/>
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               HeightRequest="175"/>
                         <Label Grid.Row="1"
                                            Text="{Binding Code}"
                                            TextColor="White"
                                            FontAttributes="Italic"
                                            FontSize="14"/>
-                        <FlexLayout Wrap="Wrap"
-                                    Grid.Row="2">
-                            <Label
+                        <Label Grid.Row="2" 
                                            Text="{Binding Name}"
                                            TextColor="White"
                                            FontAttributes="Bold"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Start"
-                                           FontSize="14"/>
-                            <!--<Label         Text=" - "
-                                           FontAttributes="Bold"
-                                           TextColor="White"
-                                           FontSize="14"/>
-                            <Label
+                                           FontSize="11"/>
+                        <Label Grid.Row="3"
                                            Text="{Binding Unit}"
-                                           FontAttributes="Bold"
-                                           TextColor="White"
-                                           FontSize="14"/>-->
-                        </FlexLayout>
-                        
+                                           TextColor="Wheat"
+                                           FontSize="10"/>
+
                         <Grid Grid.Row="4"
-                              ColumnDefinitions="60, *, 1*">
-
-                            <Label         Grid.Column="0"
-                                           Text="{Binding Unit}"
-                                           FontAttributes="Bold"
-                                           HorizontalOptions="Start"
-                                           VerticalOptions="Center"
-                                           TextColor="White"
-                                           FontSize="14"/>
-
-
-                            <Button Grid.Column="1"
+                              ColumnDefinitions="*, 1*">
+                            <Button Grid.Column="0"
                                             ImageSource="{StaticResource Plus}"
                                             Text="Add"
                                             Margin="0,5,0,0"
@@ -99,7 +80,7 @@
                                             Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductListControl}}, Path=AddToCartCommand}"
                                             CommandParameter="{Binding Id}">
 
-                            <Button.Triggers>
+                                <Button.Triggers>
                                     <DataTrigger TargetType="Button"
                                                  Binding="{Binding CartQuantity}"
                                                  Value="0">
@@ -108,14 +89,14 @@
                                 </Button.Triggers>
                             </Button>
 
-                            <Label Grid.Column="2"
+                            <Label Grid.Column="1"
                                                IsVisible="False"
                                                FontSize="12"
                                                VerticalOptions="Center"
                                                FontAttributes="Bold"
                                                Text="{Binding Price, StringFormat='P{0}'}"/>
 
-                            <Border Grid.Column="1"
+                            <Border Grid.Column="0"
                                                 Margin="0,5,0,0"
                                                 HorizontalOptions="Start"
                                                 IsVisible="True"

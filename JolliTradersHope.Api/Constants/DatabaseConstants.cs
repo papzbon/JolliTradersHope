@@ -2,7 +2,7 @@
 {
     public static class DatabaseConstants
     {
-        public const string GroceryConnectionStringKey = "JolliTradersHope";
+        public const string JolliTradersConnectionStringKey = "JolliTradersHope";
 
         public static class Roles
         {

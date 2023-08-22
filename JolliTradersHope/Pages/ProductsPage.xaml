@@ -2,11 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JolliTradersHope.Pages.ProductsPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:vm="clr-namespace:JolliTradersHope.ViewModels"
+             xmlns:models="clr-namespace:JolliTradersHope.Models"
+             xmlns:controls="clr-namespace:JolliTradersHope.Controls"
+             xmlns:converter="clr-namespace:JolliTradersHope.Converter"
+             x:DataType="vm:ProductPageViewModel"
              Title="Products">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid>
+        <ScrollView Margin="0,50, 0, 0">
+            <Grid>
+                <VerticalStackLayout Padding="10, 15">
+
+                    <controls:AllProductsControl AllProducts="{Binding PopularProducts}"
+                                             AddRemoveCartClicked="AllProductsControl_AddRemoveCartClicked"/>
+                </VerticalStackLayout>
+                <Grid IsVisible="{Binding IsBusy}">
+                    <BoxView Color="{StaticResource Primary}"/>
+                    <VerticalStackLayout HorizontalOptions="Center"
+                                 VerticalOptions="Center">
+                        <ActivityIndicator IsRunning="True"
+                                   Color="White"
+                                   HorizontalOptions="Center"/>
+
+                        <Label Text="Fetching data..."
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </ScrollView>
+        <Border Grid.Row="0"
+                Margin="15,5, 15, 0"
+                StrokeShape="RoundRectangle 6"
+                BackgroundColor="{StaticResource Primary}"
+                HeightRequest="60"
+                VerticalOptions="Start">
+
+            <Grid ColumnDefinitions="Auto, Auto">
+                <SearchBar Grid.Column ="0"
+                           HorizontalOptions="FillAndExpand" 
+                           Placeholder="Search products . . ."
+                           VerticalOptions="Center"
+                           PlaceholderColor="White"
+                           TextColor="White"
+                           CancelButtonColor="White"
+                           />
+                <controls:CartControl Grid.Column="1"
+                    Count="{Binding CartCount}"/>
+            </Grid>
+        </Border>
+    </Grid>
 </ContentPage>

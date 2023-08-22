@@ -1,6 +1,8 @@
 using JolliTradersHope.Api.Constants;
 using JolliTradersHope.Api.Data;
 using JolliTradersHope.Api.Data.Entities;
+using JolliTradersHope.Api.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
 
@@ -14,7 +16,21 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<JolliDbContext>(options => 
         options.UseSqlServer(builder.Configuration
                .GetConnectionString(DatabaseConstants
-               .GroceryConnectionStringKey)));
+               .JolliTradersConnectionStringKey)));
+
+//builder.Services.AddAuthentication(x =>
+//{
+//    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//})
+//    .AddJwtBearer(options =>
+//    {
+//        options.TokenValidationParameters =
+//        TokenRepository.GetTokenValidationParameters(builder.Configuration);
+//    });
+
+//builder.Services.AddTransient<ITokenRepository, TokenRepository>()
+//                .AddTransient<IAuthRepository>();
 
 var app = builder.Build();
 
@@ -25,7 +41,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+//app.UseAuthentication();
+//app.UseAuthorization();
 
 var mastersGroup = app.MapGroup("/masters").AllowAnonymous();
 

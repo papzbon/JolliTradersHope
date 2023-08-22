@@ -23,6 +23,21 @@ public static class MauiProgram
                 fonts.AddFont("fa_solid.ttf", "FontAwesome");
             });
 
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("Borderless", (handler, view) =>
+        {
+            if (view is BorderlessEntry)
+            {
+#if ANDROID
+                handler.PlatformView.Background = null;
+                handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
+#elif IOS
+            handler.PlatformView.BackgroundColor = UIKit.UIColor.Clear;
+			handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+#elif WINDOWS
+#endif
+            }
+        });
+
 
         builder.Services.AddSingleton<IPlatformHttpMessageHandler>(sp =>
         {
@@ -52,11 +67,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
         builder.Services.AddSingleton<UserService>();
         builder.Services.AddSingleton<ProductsService>();
+        builder.Services.AddSingleton<ProductPageViewModel>();
         builder.Services.AddTransient<OffersService>();
         builder.Services.AddSingleton<HomePageViewModel>();
         builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<ProductsPage>();
 
         builder.Services.AddSingleton<CartViewModel>();
+        builder.Services.AddTransient<CartPage>();
         
 
 #if DEBUG

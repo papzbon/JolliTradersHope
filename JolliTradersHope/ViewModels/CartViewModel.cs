@@ -8,10 +8,35 @@ namespace JolliTradersHope.ViewModels
 {
     public partial class CartViewModel : ObservableObject
     {
+        public event EventHandler<int> CartCountUpdated;
+        public event EventHandler<CartItem> CartItemUpdated;
+        public event EventHandler<int> CartItemRemoved;
+
         public ObservableCollection<CartItem> CartItems { get; set; } = new();
 
         [ObservableProperty] 
         private int _count; // The number of products we have in the cart (Not the quantities of those products)
+
+        [ObservableProperty]
+        private decimal _totalAmount;
+
+        [ObservableProperty]
+        private decimal _totalQuantity;
+
+        private void RecalculateTotalAmount() => TotalQuantity = CartItems.Sum(q => q.Quantity);
+            //TotalAmount = CartItems.Sum(c => c.Amount);
+
+        [RelayCommand]
+        private void IncreaseCartItemQty(Guid cartItemId)
+        {
+            var item = CartItems.FirstOrDefault(x => x.Id == cartItemId);
+            if (item is not null)
+            {
+                item.Quantity++;
+                RecalculateTotalAmount();
+                CartItemUpdated?.Invoke(this, item);
+            }
+        }
 
         [RelayCommand]
         public void AddToCart(ProductDto product)
@@ -33,7 +58,10 @@ namespace JolliTradersHope.ViewModels
                 };
                 CartItems.Add(item);
                 Count = CartItems.Count;
+                CartCountUpdated?.Invoke(this, Count);
             }
+            RecalculateTotalAmount();
+                CartItemUpdated?.Invoke(this, item);
         }
 
         [RelayCommand]
@@ -46,18 +74,24 @@ namespace JolliTradersHope.ViewModels
                 {
                     CartItems.Remove(item);
                     Count = CartItems.Count;
+                    CartItemRemoved?.Invoke(this, productId);
+                    CartCountUpdated?.Invoke(this, Count);
+
                 }
                 else
                 {
                     item.Quantity--;
+                    CartItemUpdated?.Invoke(this, item);
                 }
             }
+            RecalculateTotalAmount();
         }
 
         private void ClearCart()
         {
             CartItems.Clear();
             Count = 0;
+            RecalculateTotalAmount();
         }
     }
 }

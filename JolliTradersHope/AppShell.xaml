@@ -24,7 +24,7 @@
                       Icon="{StaticResource Home}"
                       ContentTemplate="{DataTemplate pages:HomePage}"
                       Route="HomePage"/>
-        <ShellContent Title="Products"
+        <ShellContent Title="Category"
                       Icon="{StaticResource Products}"
                       ContentTemplate="{DataTemplate pages:CategoryPage}"
                       Route="CategoryPage"/>

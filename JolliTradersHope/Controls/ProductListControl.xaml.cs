@@ -28,9 +28,11 @@ public partial class ProductListControl : ContentView
         set => SetValue(ProductsProperty, value);
 
     }
-    [RelayCommand] private void AddToCart(int productId) => 
+    [RelayCommand] 
+    private void AddToCart(int productId) => 
         AddRemoveCartClicked?.Invoke(this, new ProductCartItemChangeEventArgs(productId, 1));
 
-    [RelayCommand] private void RemoveFromCart(int productId) =>
+    [RelayCommand] 
+    private void RemoveFromCart(int productId) =>
         AddRemoveCartClicked?.Invoke(this, new ProductCartItemChangeEventArgs((int)productId, -1));
 }

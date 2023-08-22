@@ -61,7 +61,7 @@
                           TextColor="{StaticResource Primary}"
                           FontSize="14"
                           FontAttributes="Bold"/>
-                            <Span Text="Papiebon"
+                            <Span Text="Danilo"
                           TextColor="{StaticResource Mid}"
                           FontSize="18"
                           FontAttributes="Bold"/>
@@ -69,7 +69,7 @@
                     </Label.FormattedText>
                 </Label>
 
-                <controls:Spacer Space="15"/>
+                <!--<controls:Spacer Space="15"/>
 
                 <Label Text="Let's order some items for you."
                Style="{StaticResource H2}"
@@ -115,7 +115,7 @@
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                </CollectionView>
+                </CollectionView>-->
 
                 <controls:Spacer Space="20"/>
 
